@@ -21,3 +21,22 @@ BEGIN
 
   SELECT @age AS Age;
 END;
+
+go
+
+
+Stored procedure to find the given date is greater than current date or not.
+
+CREATE PROCEDURE IsDateOnOrAfterToday (@dateToCheck DATE)
+AS
+BEGIN
+  DECLARE @isDateOnOrAfterToday BIT;
+
+  SET @isDateOnOrAfterToday = CAST((@dateToCheck >= GETDATE()) AS BIT);
+
+  SELECT @isDateOnOrAfterToday AS IsDateOnOrAfterToday;
+END;
+
+
+
+

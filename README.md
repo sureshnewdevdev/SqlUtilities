@@ -37,6 +37,23 @@ BEGIN
   SELECT @isDateOnOrAfterToday AS IsDateOnOrAfterToday;
 END;
 
+*************************
+CREATE PROCEDURE CheckDate (@dateToCheck DATE)
+AS
+BEGIN
+  DECLARE @currentDate DATE;
+
+  SET @currentDate = GETDATE();
+
+  IF @dateToCheck >= @currentDate
+  BEGIN
+    SELECT 1 AS IsDateGreaterThanOrEqualToCurrent; -- Return 1 if true
+  END
+  ELSE
+  BEGIN
+    SELECT 0 AS IsDateGreaterThanOrEqualToCurrent; -- Return 0 if false
+  END
+END;
 
 
 

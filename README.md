@@ -55,5 +55,34 @@ BEGIN
   END
 END;
 
+Azure function to calculate the age
+    public static class Function1
+    {
+        [FunctionName("Function1")]
+        public static async Task<IActionResult> Run(
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+            ILogger log)
+        {
+            var val1 = req.Query["date"];
 
+            var dateToCheck = DateTime.Parse(val1);
+
+            int age = CalculateAge(dateToCheck);
+
+            var result = (age > 18);
+
+            return new OkObjectResult(result);
+        }
+
+        private static int CalculateAge(DateTime dateOfBirth)
+        {
+            int age = 0;
+            age = DateTime.Now.Year - dateOfBirth.Year;
+            if (DateTime.Now.DayOfYear < dateOfBirth.DayOfYear)
+                age = age - 1;
+
+            return age;
+        }
+    }
+}
 
